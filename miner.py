@@ -5,7 +5,7 @@ import string, random, os, json, msvcrt, time, encoder, decoder
 #   ryangearll@gmail.com
 #   @ryanxea
 
-VERSION = "1.1"
+VERSION = "1.5"
 DATEUPDATED = "6/22/2017"
 os.system('color a')
 
@@ -17,7 +17,7 @@ def clearScreen():          # Clears the screen and prints the header at the top
     os.system('cls')
     print("Hehecoin Miner v" + VERSION + ", Last Updated " + DATEUPDATED + "\n\n")
 
-def exitProgram(d = None):          # Provides the user with a prompt before exiting. If given a dictionary, encodes it accordingly and saves to wallet.txt
+def exitProgram(d = None):  # Provides the user with a prompt before exiting. If given a dictionary, encodes it accordingly and saves to wallet.txt
     if not d==None:
         updateWallet(d)
     input("\nPress enter to exit...\n")
@@ -38,14 +38,26 @@ def mine():                 # Starts mining for hehecoin
         time.sleep(1)
         print("...")
     print("Beginning mining process. Press any button to stop.\n")
+    found = 0
+    start = time.time()
+    print("Coins found: " + str(found) + "  Current balance: " + str(d["Coins"]))
     while True:
         search = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(4096))
         x = 3
         for x in range(len(search)):
             if search[x]==search[x-1] and search[x]==search[x-2] and search[x]==search[x-3]:
                 d["Coins"] += 1
-                print("A coin has been found! Added to wallet.     New balance: " + str(d["Coins"]))
+                found += 1
+                clearScreen()
+                print("Server handshake verified, initializing mining process...\n...\n...\n...\n...\nBeginning mining process. Press any button to stop.\n")
+                print("Coins found: " + str(found) + "  Current balance: " + str(d["Coins"]))
                 updateWallet(d)
+        end = time.time()
+        diff = end - start
+        clearScreen()
+        print("Server handshake verified, initializing mining process...\n...\n...\n...\n...\nBeginning mining process. Press any button to stop.\n")
+        print("Coins found: " + str(found) + "  Current balance: " + str(d["Coins"]))
+        print("\n\nElapsed Time: {:0.1f} seconds.".format(diff))
         time.sleep(0.2)
         if msvcrt.kbhit():break
 
