@@ -5,7 +5,7 @@ import string, random, os, json, encoder, decoder
 #   ryangearll@gmail.com
 #   @ryanxea
 
-VERSION = "1.1"
+VERSION = "1.3"
 DATEUPDATED = "6/22/2017"
 os.system('color a')
 
